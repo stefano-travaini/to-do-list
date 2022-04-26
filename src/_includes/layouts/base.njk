@@ -22,27 +22,24 @@
 
         {% if projEnv.eleventy === "production" %}
             {% set link = "/assets/css/" + csshash.indexCSS %}
-            <link rel="preload" href="{{ link | url }}" as="style" />
-            <link rel="stylesheet" href="{{ link  | url }}" type="text/css" />
+            <link rel="preload" href="{{ link | url }}" as="style"/>
+            <link rel="stylesheet" href="{{ link  | url }}" type="text/css"/>
         {% else %}
-            <link rel="stylesheet" href="/assets/css/index.css" type="text/css" />
+            <link rel="stylesheet" href="/assets/css/index.css" type="text/css"/>
         {% endif %}
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <link rel="alternate" href="{{ metadata[locale].feed.path | url }}" type="application/atom+xml" title="{{ metadata[locale].title }}">
         <link rel="alternate" href="{{ metadata[locale].jsonfeed.path | url }}" type="application/json" title="{{ metadata[locale].title }}">
     </head>
-    <body class="s-common s-light-theme default-layout">
-        {% include "components/header.njk" %}
+    <body class="common-styles sidebar-layout sidebar-layout--dark">
+        {% include "components/sidebar.njk" %}
 
         <main class="{% if templateClass %}{{ templateClass }}{% endif %}">
             {{ content | safe }}
         </main>
-
-        {% include "components/footer.njk" %}
 
         <script type="module" src="{{ '/assets/js/bundle.js' | url }}"></script>
     </body>

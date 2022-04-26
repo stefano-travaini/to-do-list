@@ -1,25 +1,42 @@
-<div class="p-index">
-    <section class="p-index_hero">
-        <h1>
-            {{ main[locale].welcome }}
-        </h1>
-        <p>
-            {{ main[locale].siteDescription | safe }}
-        </p>
-    </section>
-    <section class="p-index_latest">
-        <h2 class="u-mb--16">
-            {% set maxPosts = collections.posts.length | min(3) %}
-            {{ main[locale].latest | capitalize }}
-            {% if maxPosts == 1 %}
-                {{ main[locale].post }}
-            {% else %}
-                {{ maxPosts }} {{ main[locale].posts }}
-            {% endif %}
-        </h2>
-        <ul class="c-posts-list">
-            {% set postslist = collections.posts | head(3) %}
-            {% include "components/blog-post-items.njk" %}
-        </ul>
-    </section>
-</div>
+<button class="builder__toggle" type="button">
+    <span>New task</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><path fill="#ffffff" d="M501.333 245.333H266.667V10.667C266.667 4.776 261.891 0 256 0s-10.667 4.776-10.667 10.667v234.667H10.667C4.776 245.333 0 250.109 0 256s4.776 10.667 10.667 10.667h234.667v234.667c0 5.891 4.776 10.667 10.667 10.667s10.667-4.776 10.667-10.667V266.667h234.667c5.891 0 10.667-4.776 10.667-10.667-.002-5.891-4.778-10.667-10.669-10.667z"/></svg>
+</button>
+
+<section id="builder" class="builder builder__outer">
+    <div class="builder__title">New task</div>
+
+    <div class="builder__inner">
+        <input class="builder__input-title" type="text" placeholder="Insert task title..."></input>
+
+        <div class="builder__controls">
+            <div class="builder__switch">
+                <span>High priority</span>
+                <input class="builder__input-priority" type="checkbox" name="high_priority" id="switch"/>
+                <label for="switch">Toggle</label>
+            </div>
+
+            <button class="builder__add-btn" type="button" disabled>Add</button>
+        </div>
+    </div>
+</section>
+
+<section id="not-done" class="list list--is-empty">
+    <div class="list__title">In progress<span class="list__counter">0</span></div>
+    <div class="list__items-slot"></div>
+</section>
+
+<section id="done" class="list list--is-empty">
+    <div class="list__title">Done<span class="list__counter">0</span></div>
+    <div class="list__items-slot"></div>
+</section>
+
+<template id="item-template">
+    <div class="item">
+        <input id="" type="checkbox"/>
+        <label for=""></label>
+        <button class="item__remove-btn" type="button">
+            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg"><path d="M10 0a5 5 0 0 1 4.9 4.004H19a1 1 0 1 1 0 2h-1v13.304A3.7 3.7 0 0 1 14.307 23H5.693A3.7 3.7 0 0 1 2 19.308V6.004H1a1 1 0 1 1 0-2h4.1A5 5 0 0 1 10 0Zm6 6.004H4v13.304A1.7 1.7 0 0 0 5.693 21h8.614A1.7 1.7 0 0 0 16 19.308V6.004Zm-8 3a1 1 0 0 1 1 .999V17a1 1 0 0 1-2 0v-6.998a1 1 0 0 1 1-1Zm4 0a1 1 0 0 1 1 .999V17a1 1 0 0 1-2 0v-6.998a1 1 0 0 1 1-1Zm-2-7a3 3 0 0 0-2.816 2h5.632a3 3 0 0 0-2.816-2Z" fill="#CE5151" fill-rule="nonzero"/></svg>
+        </button>
+    </div>
+</template>
